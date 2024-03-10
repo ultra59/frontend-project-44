@@ -9,17 +9,17 @@ export default function getProgression() {
   let count = 0;
   console.log('What number is missing in the progression?');
   for (let i = 0; i < 3; i += 1) {
-    const progressionIndex = Math.floor(Math.random() * 5 + 3);
+    const progressIndex = Math.floor(Math.random() * 5 + 3);
     const randomStart = Math.floor(Math.random() * 10);
-    const progressionLength = Math.floor(Math.random() * 5 + 5);
-    const randomSecretNumber = Math.floor(Math.random() * progressionLength);
+    const progressLength = Math.floor(Math.random() * 5 + 5);
+    const randomHiddenNum = Math.floor(Math.random() * progressLength);
 
-    const progressionArray = [randomStart];
-    for (let j = 0; j < progressionLength; j += 1) {
-      progressionArray.push(progressionArray[progressionArray.length - 1] + progressionIndex);
+    const arrayProgress = [randomStart];
+    for (let j = 0; j < progressLength; j += 1) {
+      arrayProgress.push(arrayProgress[arrayProgress.length - 1] + progressIndex);
     }
-    const correctAnswer = progressionArray.splice(randomSecretNumber, 1, '..');
-    console.log(`Question: ${progressionArray.join(' ')}`);
+    const correctAnswer = arrayProgress.splice(randomHiddenNum, 1, '..');
+    console.log(`Question: ${arrayProgress.join(' ')}`);
     const answer = readlineSync.question('Your answer: ');
 
     if (Number(answer) === Number(correctAnswer)) {

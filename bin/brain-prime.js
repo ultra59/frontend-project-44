@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import readlineSync from 'readline-sync';
 import { name } from '../src/cli.js';
-import { howdy, welldones } from '../src/utils.js';
+import { howdy, welldone } from '../src/utils.js';
 
 function isPrime(randomNumber) {
   for (let i = 2; i < randomNumber; i += 1) {
@@ -29,7 +29,7 @@ export default function getisPrimeNumbers() {
       break;
     }
     if (countSuccess === 3) {
-      welldones();
+      welldone();
     }
   }
 }
