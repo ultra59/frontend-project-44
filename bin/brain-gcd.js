@@ -1,40 +1,24 @@
 #!/usr/bin/env node
-import readlineSync from 'readline-sync';
-import { name } from '../src/cli.js';
-import { howdy, welldone } from '../src/utils.js';
+import getRandomNum from '../src/getRandomNum.js';
+import runGameFunction from '../src/gameFunction.js';
 
-function NOD(newValue, newValue2) {
-  if (newValue2 > newValue) {
-    return String(NOD(newValue2, newValue));
-  }
-  if (!newValue2) {
-    return newValue;
-  }
-  return String(NOD(newValue2, newValue % newValue2));
-}
+const description = 'Find the greatest common divisor of given numbers.';
 
-export default function getNod() {
-  howdy();
-  console.log('Find the greatest common divisor of given numbers.');
-  let count = 0;
-  for (let i = 0; i < 3; i += 1) {
-    const newValue = Math.floor(Math.random() * 50);
-    const newValue2 = Math.floor(Math.random() * 50);
-    const check = `${newValue} ${newValue2}`;
-    console.log(`Question: ${check}`);
-    const answer = readlineSync.question('Your answer: ');
-
-    if (answer === NOD(newValue, newValue2)) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${NOD(newValue, newValue2)}'.
-      Let's try again, ${name}!`);
+const getNod = () => {
+  const newValue = getRandomNum() + 1;
+  const newValue2 = getRandomNum() + 1;
+  const question = `${newValue} ${newValue2}`;
+  let correctAnswer = '';
+  for (let i = Math.min(newValue, newValue2); i >= 0; i -= 1) {
+    if (newValue % i === 0 && newValue2 % i === 0) {
+      correctAnswer = String(i);
       break;
     }
   }
-  if (count === 3) {
-    welldone();
-  }
-}
-getNod();
+  return [question, correctAnswer];
+};
+
+const getNewNod = () => {
+  runGameFunction(description, getNod);
+};
+getNewNod();

@@ -1,50 +1,38 @@
 #!/usr/bin/env node
-/* eslint no-eval: 0 */
-/* eslint-disable no-unused-vars */
-import readlineSync from 'readline-sync';
-import { name } from '../src/cli.js';
-import { howdy, welldone } from '../src/utils.js';
+import getRandomNum from '../src/getRandomNum.js';
+import runGameFunction from '../src/gameFunction.js';
 
-// eslint-disable-next-line consistent-return
-export default function calculateFunction() {
-  howdy();
-  console.log('What is the result of the expression?');
-  let count = 0;
+const description = 'What is the result of the expression?';
+const operator = ['+', '-', '*'];
 
-  const operator = ['+', '-', '*'];
-
-  const askQuestion = () => {
-    const newValue = Math.round(Math.random() * 100);
-    const newValue2 = Math.round(Math.random() * 20);
-    const randomIndex = Math.floor(Math.random() * 3);
-
-    const check = `${newValue} ${operator[randomIndex]} ${newValue2}`;
-    console.log(`Question: ${check}`);
-
-    const answer = readlineSync.question('Your answer: ');
-
-    if ((operator[randomIndex] === '+' && Number(answer) === newValue + newValue2)
-        || (operator[randomIndex] === '-' && Number(answer) === newValue - newValue2)
-        || (operator[randomIndex] === '*' && Number(answer) === newValue * newValue2)) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is the wrong answer ;(. Correct answer was '${eval(check)}'. Let's try again, ${name}!`);
-      return false;
-    }
-
-    return true;
-  };
-
-  for (let i = 0; i < 3; i += 1) {
-    if (!askQuestion()) {
+const result = (newValue, newValue2, getRandomExample) => {
+  let expression = 0;
+  switch (getRandomExample) {
+    case '+':
+      expression = newValue + newValue2;
       break;
-    }
+    case '-':
+      expression = newValue - newValue2;
+      break;
+    case '*':
+      expression = newValue * newValue2;
+      break;
+    default:
   }
+  return expression;
+};
 
-  if (count === 3) {
-    welldone();
-  }
-}
+const getMeCorrectAnswer = () => {
+  const getRandomExample = operator[Math.floor(Math.random() * operator.length)];
+  const newValue = getRandomNum(1, 10);
+  const newValue2 = getRandomNum(1, 10);
+  const question = `${newValue} ${getRandomExample} ${newValue2}`;
+  const answer = String(result(newValue, newValue2, getRandomExample));
+  return [question, answer];
+};
+
+const calculateFunction = () => {
+  runGameFunction(description, getMeCorrectAnswer);
+};
 
 calculateFunction();
