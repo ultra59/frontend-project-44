@@ -8,7 +8,8 @@ const gameFunction = (description, playFunction) => {
   console.log(`Hello, ${name}!`);
   console.log(description);
 
-  let attemptsLeft = count;
+  let ziliboba = count;
+
   for (let i = 0; i < count; i += 1) {
     const [question, correctAnswer] = playFunction();
     console.log(`Question: ${question}`);
@@ -16,18 +17,13 @@ const gameFunction = (description, playFunction) => {
 
     if (answer === correctAnswer) {
       console.log('Correct!');
+      ziliboba -= 1;
     } else {
       console.log(`${answer} is the wrong answer ;(. Correct answer was ${correctAnswer}.`);
-      attemptsLeft -= 1;
-    }
-
-    if (attemptsLeft === 0) {
-      console.log(`Game over, ${name}!`);
-      return;
-    }
+      break;
+    } 
+    if (ziliboba === 0) console.log(`Congratulations, ${name}!`);
   }
-
-  console.log(`Congratulations, ${name}!`);
 };
 
 export default gameFunction;
