@@ -22,7 +22,7 @@ const gameFunction = (description, playFunction) => {
       console.log(`${answer} is the wrong answer ;(. Correct answer was ${correctAnswer}.`);
       console.log(`Let's try again, ${name}!`);
       break;
-    } 
+    }
     if (ziliboba === 0) console.log(`Congratulations, ${name}!`);
   }
 };
