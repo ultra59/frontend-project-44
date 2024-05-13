@@ -8,7 +8,7 @@ const gameFunction = (description, playFunction) => {
   console.log(`Hello, ${name}!`);
   console.log(description);
 
-  let ziliboba = count;
+  let newCount = count;
 
   for (let i = 0; i < count; i += 1) {
     const [question, correctAnswer] = playFunction();
@@ -17,13 +17,13 @@ const gameFunction = (description, playFunction) => {
 
     if (answer === correctAnswer) {
       console.log('Correct!');
-      ziliboba -= 1;
+      newCount -= 1;
     } else {
       console.log(`${answer} is the wrong answer ;(. Correct answer was ${correctAnswer}.`);
       console.log(`Let's try again, ${name}!`);
       break;
     }
-    if (ziliboba === 0) console.log(`Congratulations, ${name}!`);
+    if (newCount === 0) console.log(`Congratulations, ${name}!`);
   }
 };
 
